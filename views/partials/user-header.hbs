@@ -16,9 +16,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/cart">Cart <span class="badge badge-secondary">{{cartCount}}</span></a>
                 </li>
+                {{#if user}}
                 <li class="nav-item">
                     <a class="nav-link" href="/orders">My Orders</a>
                 </li>
+                {{/if}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

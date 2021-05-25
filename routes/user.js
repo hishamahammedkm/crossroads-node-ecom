@@ -3,6 +3,13 @@ var router = express.Router();
 var productHelpers = require("../helpers/product-helpers");
 var userHelpers = require("../helpers/user-helpers");
 /* GET home page. */
+const verifyLogin=(req,res,next)=>{
+  if(req.session.loggedIn){
+    next()
+  }else{
+    res.redirect('/login')
+  }
+}
 router.get("/", function (req, res, next) {
   let user = req.session.user
   productHelpers.getAllProducts().then((products) => {
@@ -10,7 +17,13 @@ router.get("/", function (req, res, next) {
   });
 });
 router.get("/login", (req, res) => {
-  res.render("user/login");
+  if(req.session.loggedIn){
+    res.redirect('/')
+  }else{
+    res.render("user/login",{'loginError':req.session.loginError});
+    req.session.loginError=''
+  }
+  
 });
 router.get("/signup", (req, res) => {
   res.render("user/signup");
@@ -27,6 +40,7 @@ router.post("/login", (req, res) => {
       req.session.user = response.user
       res.redirect('/');
     }else{
+      req.session.loginError='invalid username or password'
       res.redirect('/login');
     }
   });
@@ -35,4 +49,8 @@ router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.redirect('/login')
 })
+router.get('/cart',verifyLogin,(req,res)=>{
+  res.render('user/cart')
+})
+
 module.exports = router;

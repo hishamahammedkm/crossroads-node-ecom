@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   })
 });
 router.get('/add-product',function(req,res){
-  res.render('admin/add-products')
+  res.render('admin/add-products',{admin:true})
 })
 router.post('/add-product',function(req,res){
 
@@ -25,5 +25,11 @@ router.post('/add-product',function(req,res){
     })
   })
 
-
+router.get('/delete-product/:id',(req,res)=>{
+  let proId=req.params.id
+  productHelpers.deleteProduct(proId).then((response)=>{
+    res.redirect('/admin')
+  })
+  
+})
 module.exports = router;
