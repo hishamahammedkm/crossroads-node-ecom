@@ -4,7 +4,7 @@
 
         <a class="navbar-brand" href="#">CART ME</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -21,19 +21,29 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        
-                            Account
-                      
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{#if user}}
+                        {{user.name}}
+                        {{else}}
+                        Account
+                        {{/if}}
+
+
 
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {
-                            <a class="dropdown-item" href="/profile/{{user._id}}">Profile</a>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                       
-                            <a class="dropdown-item" href="/login">Login</a>
-                        
+
+                        <a class="dropdown-item" href="/profile/{{user._id}}">Profile</a>
+
+                        {{#if user}}
+                        <a class="dropdown-item" href="/logout">Logout</a>
+
+                        {{else}}
+                        <a class="dropdown-item" href="/login">Login</a>
+
+                        {{/if}}
+
+
                     </div>
                 </li>
             </ul>

@@ -1,5 +1,6 @@
 var db = require('../config/connection')
 var collection = require('../config/collections')
+
 module.exports={
     addproduct:(product,callback)=>{
         db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product).then((data)=>{
