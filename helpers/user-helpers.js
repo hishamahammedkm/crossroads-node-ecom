@@ -60,7 +60,7 @@ module.exports = {
                 db.get()
                     .collection(collection.CART_COLLECTION)
                     .insertOne(cart, (err, done) => {
-                        console.log(done);
+                        
                         resolve();
                     });
             } else {
@@ -80,7 +80,6 @@ module.exports = {
     },
     getCartProducts: (userId) => {
         return new Promise(async (resolve) => {
-            console.log(userId);
             let cart = await db
                 .get()
                 .collection(collection.CART_COLLECTION)
